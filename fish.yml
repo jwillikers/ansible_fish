@@ -1,0 +1,22 @@
+- name: Install the latest fish shell and set it as the login shell
+  hosts: desktops
+  become: False
+  vars:
+    current_user: "{{ ansible_user_id }}"
+  tasks:
+    - name: add the fish shell PPA
+      become: True
+      apt_repository:
+      repo: ppa:fish-shell/release-3
+    - name: install apt packages
+      become: True
+      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      with_items:
+        - fish
+    - name: Add fish to login shells
+      become: True
+      shell: add-shell /usr/bin/fish
+    - name: Set fish as the user's login shell
+      user:
+        shell: /usr/bin/fish
+  # handlers:
