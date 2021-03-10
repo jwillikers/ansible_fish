@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ubuntu_2004_desktop"
+    - name: "Include ansible_fish"
       include_role:
-        name: "ubuntu_2004_desktop"
+        name: "ansible_fish"

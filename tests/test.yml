@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ubuntu_2004_desktop
+    - ansible_fish

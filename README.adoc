@@ -1,4 +1,4 @@
-= Ubuntu 20.04 Desktop Playbook
+= Ansible fish Role
 Jordan Williams <jordan@jwillikers.com>
 :experimental:
 :icons: font
@@ -10,7 +10,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-An Ansible playbook to configure the Ubuntu 20.04 desktop to my liking.
+An Ansible role to configure the fish shell, primarily for my personal preferences.
 
 == Prerequisites
 
@@ -38,13 +38,6 @@ Instructions for installing everything are provided below.
 [source,sh]
 ----
 ➜ git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-Cloning into '/home/ubuntu/.asdf'...
-remote: Enumerating objects: 145, done.
-remote: Counting objects: 100% (145/145), done.
-remote: Compressing objects: 100% (85/85), done.
-remote: Total 5782 (delta 76), reused 93 (delta 59), pack-reused 5637
-Receiving objects: 100% (5782/5782), 1.09 MiB | 6.01 MiB/s, done.
-Resolving deltas: 100% (3293/3293), done.
 ----
 
 . Checkout the latest version of asdf.
@@ -158,12 +151,6 @@ _ZSH_::
 [source,sh]
 ----
 ➜ asdf plugin add python
-initializing plugin repository...
-Cloning into '/home/ubuntu/.asdf/repository'...
-remote: Enumerating objects: 2450, done.
-remote: Total 2450 (delta 0), reused 0 (delta 0), pack-reused 2450
-Receiving objects: 100% (2450/2450), 553.27 KiB | 3.57 MiB/s, done.
-Resolving deltas: 100% (1140/1140), done.
 ----
 
 . Before installing Pipenv, configure the default _global_ Python version for the user.
@@ -238,27 +225,6 @@ _Bash / ZSH_::
 [source,sh]
 ----
 ➜ python -m pip install --user pipx
-Collecting pipx
-  Downloading pipx-0.15.6.0-py3-none-any.whl (43 kB)
-     |████████████████████████████████| 43 kB 636 kB/s
-Collecting argcomplete<2.0,>=1.9.4
-  Downloading argcomplete-1.12.1-py2.py3-none-any.whl (38 kB)
-Collecting packaging>=20.0
-  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
-Collecting userpath>=1.4.1
-  Downloading userpath-1.4.1-py2.py3-none-any.whl (14 kB)
-Collecting pyparsing>=2.0.2
-  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
-     |████████████████████████████████| 67 kB 1.4 MB/s
-Requirement already satisfied: six in /usr/lib/python3/dist-packages (from packaging>=20.0->pipx) (1.14.0)
-Requirement already satisfied: click in /usr/lib/python3/dist-packages (from userpath>=1.4.1->pipx) (7.0)
-Requirement already satisfied: distro; platform_system == "Linux" in /usr/lib/python3/dist-packages (from userpath>=1.4.1->pipx) (1.4.0)
-Installing collected packages: argcomplete, pyparsing, packaging, userpath, pipx
-  WARNING: The script userpath is installed in '/home/ubuntu/.local/bin' which is not on PATH.
-  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-  WARNING: The script pipx is installed in '/home/ubuntu/.local/bin' which is not on PATH.
-  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-Successfully installed argcomplete-1.12.1 packaging-20.4 pipx-0.15.6.0 pyparsing-2.4.7 userpath-1.4.1
 ----
 
 . Add the directory where pip installs executables for the local user to `PATH`.
@@ -266,19 +232,6 @@ Successfully installed argcomplete-1.12.1 packaging-20.4 pipx-0.15.6.0 pyparsing
 [source,sh]
 ----
 ➜ python -m pipx ensurepath
-Success! Added /home/ubuntu/.local/bin to the PATH environment
-    variable.
-/home/ubuntu/.local/bin has been been added to PATH, but you need to
-    open a new terminal or re-login for this PATH change to take
-    effect.
-
-Consider adding shell completions for pipx. Run 'pipx completions' for
-instructions.
-
-You will need to open a new terminal or re-login for the PATH changes
-to take effect.
-
-Otherwise pipx is ready to go! ✨ 🌟 ✨
 ----
 
 . To make executables installed by pipx available, reload your shell.
@@ -311,11 +264,6 @@ _ZSH_::
 [source,sh]
 ----
 ➜ python -m pipx install pipenv
-  installed package pipenv 2020.8.13, Python 3.8.5
-  These apps are now globally available
-    - pipenv
-    - pipenv-resolver
-done! ✨ 🌟 ✨
 ----
 
 . Add the direnv plugin to asdf.
@@ -401,14 +349,14 @@ _ZSH_::
 +
 [source,sh]
 ----
-➜ git clone https://github.com/jwillikers/ubuntu-20.04-desktop-playbook.git ~/Projects/ubuntu-20.04-desktop-playbook
+➜ git clone https://github.com/jwillikers/ansible_fish.git ~/Projects/ansible_fish
 ----
 
 . Change to the project directory.
 +
 [source,sh]
 ----
-➜ cd ~/Projects/ubuntu-20.04-desktop-playbook
+➜ cd ~/Projects/ansible_fish
 ----
 
 . Run asdf to automatically install Python and direnv.
@@ -417,21 +365,6 @@ _ZSH_::
 [source,sh]
 ----
 ➜ asdf install
-∗ Downloading and installing direnv...
-The installation was successful!
-Downloading python-build...
-Cloning into '/home/ubuntu/.asdf/plugins/python/pyenv'...
-remote: Enumerating objects: 19, done.
-remote: Counting objects: 100% (19/19), done.
-remote: Compressing objects: 100% (16/16), done.
-remote: Total 18370 (delta 3), reused 10 (delta 2), pack-reused 18351
-Receiving objects: 100% (18370/18370), 3.70 MiB | 6.55 MiB/s, done.
-Resolving deltas: 100% (12507/12507), done.
-python-build 3.9.0 /home/ubuntu/.asdf/installs/python/3.9.0
-Downloading Python-3.9.0.tar.xz...
--> https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tar.xz
-Installing Python-3.9.0...
-Installed Python-3.9.0 to /home/ubuntu/.asdf/installs/python/3.9.0
 ----
 
 [TIP]
@@ -487,29 +420,6 @@ direnv: error /home/ubuntu/Source/MyProject/.envrc is blocked. Run `direnv allow
 [source,sh]
 ----
 ➜ direnv allow
-direnv: loading ~/Source/MyProject/.envrc
-direnv: using asdf
-direnv: Creating env file /home/ubuntu/.asdf/installs/direnv/2.23.1/env/3889178603-777313312-2662766433-906191085
-direnv: loading ~/.asdf/installs/direnv/2.23.1/env/3889178603-777313312-2662766433-906191085
-direnv: using asdf direnv 2.23.1
-direnv: using asdf python 3.9.0
-Creating a virtualenv for this project…
-Pipfile: /home/ubuntu/Source/MyProject/Pipfile
-Using /home/ubuntu/.asdf/installs/python/3.9.0/bin/python3.9 (3.9.0) to create virtualenv…
-⠧ Creating virtual environment...direnv: ([/home/ubuntu/.asdf/installs/direnv/2.23.1/bin/direnv export bash]) is taking a while to execute. Use CTRL-C to give up.
-⠦ Creating virtual environment...created virtual environment CPython3.9.0.final.0-64 in 1759ms
-  creator CPython3Posix(dest=/home/ubuntu/.local/share/virtualenvs/MyProject-6C2lAvdi, clear=False, global=False)
-  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/ubuntu/.local/share/virtualenv)
-    added seed packages: pip==20.2.4, setuptools==50.3.2, wheel==0.35.1
-  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
-
-✔ Successfully created virtual environment!
-Virtualenv location: /home/ubuntu/.local/share/virtualenvs/MyProject-6C2lAvdi
-Installing dependencies from Pipfile.lock (df42de)…
-  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 26/26 — 00:01:09
-To activate this project's virtualenv, run pipenv shell.
-Alternatively, run a command inside the virtualenv with pipenv run.
-direnv: export +PIPENV_ACTIVE +VIRTUAL_ENV ~PATH
 ----
 
 Now, whenever you change into the project directory, the project's virtual environment will automatically be loaded for you.
