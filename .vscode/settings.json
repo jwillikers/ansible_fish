@@ -1,0 +1,30 @@
+{
+    "cSpell.words": [
+        "Ansible's",
+        "Btrfs",
+        "Pipenv",
+        "Pipfile",
+        "Podman",
+        "adoc",
+        "asdf",
+        "direnv",
+        "ensurepath",
+        "envrc",
+        "libbz",
+        "libffi",
+        "liblzma",
+        "libncurses",
+        "libreadline",
+        "libsqlite",
+        "libssl",
+        "libxml",
+        "libxmlsec",
+        "llvm",
+        "mkdir",
+        "pipx",
+        "pyenv",
+        "subvolume",
+        "venv",
+        "virtualenv"
+    ]
+}
