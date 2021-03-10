@@ -10,16 +10,14 @@
 - name: install apt packages
   become: True
   apt:
-    pkg: {{ item }}
+    pkg: fish
     update_cache: True
     cache_valid_time: 3600
-  with_items:
-    - fish
 - name: add fish to login shells
   become: True
   lineinfile:
-    dest: /etc/shells
     line: /usr/bin/fish
+    dest: /etc/shells
     state: present
 - name: set fish as the user's login shell
   user:
