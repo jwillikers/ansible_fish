@@ -9,7 +9,10 @@
     repo: ppa:fish-shell/release-3
 - name: install apt packages
   become: True
-  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  apt:
+    pkg: {{ item }}
+    update_cache: True
+    cache_valid_time: 3600
   with_items:
     - fish
 - name: add fish to login shells
