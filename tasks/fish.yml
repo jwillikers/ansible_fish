@@ -17,7 +17,10 @@
     - fish
 - name: add fish to login shells
   become: True
-  shell: add-shell /usr/bin/fish
+  lineinfile:
+    dest: /etc/shells
+    line: /usr/bin/fish
+    state: present
 - name: set fish as the user's login shell
   user:
     name: jordan
