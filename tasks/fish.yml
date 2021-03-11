@@ -23,10 +23,6 @@
   user:
     name: jordan
     shell: /usr/bin/fish
-- name: disable the fish shell greeting
-  shell:
-    executable: /usr/bin/fish
-    cmd: set -U fish_greeting ""
 - name: enable backwards-incompatible fish shell features
   shell:
     executable: /usr/bin/fish
@@ -35,6 +31,11 @@
   file:
     path: ~/.config/fish/functions/
     state: directory
+    mode: 0700
+- name: disable the fish shell greeting
+  copy:
+    src: fish_greeting.fish
+    dest: ~/.config/fish/functions/fish_greeting.fish
     mode: 0700
 - name: style the fish shell prompt according to robbyrussell's prompt
   copy:
