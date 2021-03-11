@@ -19,10 +19,13 @@
         "libssl",
         "libxml",
         "libxmlsec",
+        "lineinfile",
         "llvm",
         "mkdir",
         "pipx",
         "pyenv",
+        "robbyrussell",
+        "robbyrussell's",
         "subvolume",
         "venv",
         "virtualenv"

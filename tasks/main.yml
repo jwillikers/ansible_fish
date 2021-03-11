@@ -1,3 +1,42 @@
 ---
 # tasks file for ansible_fish
-- include: fish.yml
+- name: add the fish shell PPA
+  become: True
+  ansible.builtin.apt_repository:
+    repo: ppa:fish-shell/release-3
+- name: install apt packages
+  become: True
+  ansible.builtin.apt:
+    pkg: fish
+    update_cache: True
+    cache_valid_time: 3600
+- name: allow fish as a login shell
+  become: True
+  ansible.builtin.lineinfile:
+    line: /usr/bin/fish
+    path: /etc/shells
+    state: present
+- name: set fish as the user's login shell
+  ansible.builtin.user:
+    name: jordan
+    shell: /usr/bin/fish
+- name: set the color theme to Solarized Dark and enable backwards-incompatible features
+  ansible.builtin.copy:
+    src: fish_variables
+    dest: ~/.config/fish_variables
+    mode: 0640
+- name: create the fish shell functions directory for the user
+  ansible.builtin.file:
+    path: ~/.config/fish/functions/
+    state: directory
+    mode: 0770
+- name: disable the greeting message
+  ansible.builtin.copy:
+    src: fish_greeting.fish
+    dest: ~/.config/fish/functions/fish_greeting.fish
+    mode: 0640
+- name: style the prompt according to robbyrussell's prompt
+  ansible.builtin.copy:
+    src: /usr/share/fish/tools/web_config/sample_prompts/robbyrussell.fish
+    dest: ~/.config/fish/functions/fish_prompt.fish
+    mode: 0640
