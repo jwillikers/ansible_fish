@@ -4,7 +4,7 @@
   become: True
   ansible.builtin.apt_repository:
     repo: ppa:fish-shell/release-3
-- name: install apt packages
+- name: install the fish package
   become: true
   ansible.builtin.apt:
     pkg: fish
