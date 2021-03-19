@@ -1,4 +1,2 @@
 ---
 # defaults file for ansible_fish
-
-user: "{{ lookup('env','USER') }}"

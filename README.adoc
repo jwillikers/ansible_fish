@@ -14,13 +14,8 @@ An Ansible role to configure the fish shell, primarily for my personal preferenc
 
 == Synopsis
 
-Installs the newest fish shell on Ubuntu via the fish PPA repository, allows fish as a login, and configures the fish shell according to my preferences for the given _user_, which defaults to the user running Ansible.
-It also configures fish as the login shell for the user.
-
-== Variables
-
-The only variable is `user`.
-This is the user for whom fish is configured.
+Installs the newest fish shell on Ubuntu via the fish PPA repository, allows fish as a login shell, and configures the fish shell according to my preferences for remote _user_.
+It also configures fish as the login shell for this user.
 
 == Use
 
@@ -31,25 +26,25 @@ To use this role, you'll need to install Ansible and the role.
 Ubuntu::
 +
 --
-.. Install the software-properties-common package.
+.. Install pip for python3.
 +
 [source,sh]
 ----
-➜ sudo apt -y install software-properties-common
-----
-
-.. Add the Ansible PPA.
-+
-[source,sh]
-----
-➜ sudo add-apt-repository -yu ppa:ansible/ansible
+➜ sudo apt -y install python3-pip
 ----
 
 .. Install the Ansible package.
 +
 [source,sh]
 ----
-➜ sudo apt -y install ansible
+➜ python3 -m pip --user install ansible
+----
+
+.. Ensure that `~/.local/bin` is on your path.
++
+[source,sh]
+----
+➜ fish_add_path -p ~/.local/bin
 ----
 --
 
@@ -77,12 +72,13 @@ Fedora::
 . Run the role.
 Here, the role is run against the local machine.
 
-// todo Use -c local for local connection?
+sudo su
+
 Command-Line::
 +
 [source,sh]
 ----
-➜ ansible localhost -m include_role -a name=ansible_fish
+➜ ansible localhost --connection=local -m include_role -a name=ansible_fish
 ----
 
 Playbook::
@@ -95,18 +91,15 @@ Playbook::
 ----
 ---
 - hosts: localhost
- connection: local
   roles:
     - role: ansible_fish
-      vars:
-        user: some_user
 ----
 
 .. Execute the playbook.
 +
 [source,sh]
 ----
-➜ ansible-playbook my-playbook.yml -i "localhost,"
+➜ ansible-playbook my-playbook.yml -i "localhost," --connection=local
 ----
 --
 

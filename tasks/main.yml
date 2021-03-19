@@ -19,9 +19,8 @@
     state: present
 - name: set fish as the user's login shell
   ansible.builtin.user:
-    name: "{{ user }}"
+    name: "{{ ansible_user_id }}"
     shell: /usr/bin/fish
-  register: u
 - name: enable backwards-incompatible features
   ansible.builtin.shell:
     executable: /usr/bin/fish
@@ -32,28 +31,28 @@
   changed_when: previous.stdout != " 'stderr-nocaret' 'qmark-noglob'"
 - name: create the user's fish config directory
   ansible.builtin.file:
-    path: "{{ u.home }}/.config/fish/"
+    path: "{{ ansible_user_dir }}/.config/fish/"
     state: directory
     mode: 0770
-    owner: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
 - name: create the user's fish functions directory
   ansible.builtin.file:
-    path: "{{ u.home }}/.config/fish/functions/"
+    path: "{{ ansible_user_dir }}/.config/fish/functions/"
     state: directory
     mode: 0770
-    owner: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
 - name: disable the greeting message
   ansible.builtin.copy:
     src: fish_greeting.fish
-    dest: "{{ u.home }}/.config/fish/functions/fish_greeting.fish"
+    dest: "{{ ansible_user_dir }}/.config/fish/functions/fish_greeting.fish"
     mode: 0640
-    owner: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
 - name: style the prompt according to robbyrussell's prompt
   ansible.builtin.copy:
     src: /usr/share/fish/tools/web_config/sample_prompts/robbyrussell.fish
-    dest: "{{ u.home }}/.config/fish/functions/fish_prompt.fish"
+    dest: "{{ ansible_user_dir }}/.config/fish/functions/fish_prompt.fish"
     mode: 0640
-    owner: "{{ user }}"
+    owner: "{{ ansible_user_id }}"
 
 # Set fish color theme variables
 - name: set fish_color_normal to normal
