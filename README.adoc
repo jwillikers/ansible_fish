@@ -30,9 +30,8 @@ To use this role, you'll need to install Ansible and the role.
 
 . Install Ansible.
 
-Ubuntu::
-+
---
+Ubuntu:::
+
 .. Install pip for python3.
 +
 [source,sh]
@@ -48,14 +47,22 @@ Ubuntu::
 ----
 
 .. Ensure that `~/.local/bin` is on your path.
+
+fish::::
 +
 [source,sh]
 ----
 ➜ fish_add_path -p ~/.local/bin
 ----
---
++
+Bash / ZSH::::
++
+[source,sh]
+----
+➜ export PATH=~/.local/bin:$PATH
+----
 
-Fedora::
+Fedora:::
 +
 [source,sh]
 ----
@@ -79,14 +86,15 @@ Fedora::
 . Run the role.
 Here, the role is run against the local machine.
 
-Command-Line::
+Command-Line:::
 +
 [source,sh]
 ----
-➜ ansible localhost --connection=local --ask-become-pass -m include_role -a name=ansible_fish
+➜ ansible localhost --connection=local --ask-become-pass -m include_role \
+  -a name=ansible_fish -e user=$USER
 ----
-
-Playbook::
++
+Playbook:::
 +
 --
 .. Create a playbook which includes the role.
@@ -104,7 +112,8 @@ Playbook::
 +
 [source,sh]
 ----
-➜ ansible-playbook my-playbook.yml -i "localhost," --connection=local --ask-become-pass
+➜ ansible-playbook my-playbook.yml -i "localhost," --connection=local \
+  --ask-become-pass
 ----
 --
 
