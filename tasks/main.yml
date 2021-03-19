@@ -1,7 +1,8 @@
 ---
 # tasks file for ansible_fish
+
 - name: add the fish shell PPA
-  become: True
+  become: true
   ansible.builtin.apt_repository:
     repo: ppa:fish-shell/release-3
 - name: install the fish package
@@ -21,17 +22,19 @@
     name: "{{ user }}"
     shell: /usr/bin/fish
   register: u
+- name: enable backwards-incompatible features
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_features/ {$1=""; print $0}'
+      and set -U fish_features stderr-nocaret qmark-noglob
+  register: previous
+  changed_when: previous.stdout != " 'stderr-nocaret' 'qmark-noglob'"
 - name: create the user's fish config directory
   ansible.builtin.file:
     path: "{{ u.home }}/.config/fish/"
     state: directory
     mode: 0770
-    owner: "{{ user }}"
-- name: set the color theme to Solarized Dark and enable backwards-incompatible features
-  ansible.builtin.copy:
-    src: fish_variables
-    dest: "{{ u.home }}/.config/fish_variables"
-    mode: 0640
     owner: "{{ user }}"
 - name: create the user's fish functions directory
   ansible.builtin.file:
@@ -51,3 +54,213 @@
     dest: "{{ u.home }}/.config/fish/functions/fish_prompt.fish"
     mode: 0640
     owner: "{{ user }}"
+
+# Set fish color theme variables
+- name: set fish_color_normal to normal
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_normal/ {print $2}';
+      and set -U fish_color_normal normal
+  register: previous
+  changed_when: previous.stdout != "normal"
+- name: set fish_color_command to 93a1a1
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_command/ {print $2}';
+      and set -U fish_color_command 93a1a1
+  register: previous
+  changed_when: previous.stdout != "93a1a1"
+- name: set fish_color_quote to 657b83
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_quote/ {print $2}';
+      and set -U fish_color_quote 657b83
+  register: previous
+  changed_when: previous.stdout != "657b83"
+- name: set fish_color_redirection to 6c71c4
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_redirection/ {print $2}';
+      and set -U fish_color_redirection 6c71c4
+  register: previous
+  changed_when: previous.stdout != "6c71c4"
+- name: set fish_color_error to dc322f
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_error/ {print $2}';
+      and set -U fish_color_error dc322f
+  register: previous
+  changed_when: previous.stdout != "dc322f"
+- name: set fish_color_end to 268bd2
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_end/ {print $2}';
+      and set -U fish_color_end 268bd2
+  register: previous
+  changed_when: previous.stdout != "268bd2"
+- name: set fish_color_selection to "white --bold --background=brblack"
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_selection/ {$1=""; print $0}';
+      and set -U fish_color_selection white --bold --background=brblack
+  register: previous
+  changed_when: previous.stdout != " 'white' '--bold' '--background=brblack'"
+- name: set fish_color_search_match to "bryellow --background=black"
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_search_match/ {$1=""; print $0}';
+      and set -U fish_color_search_match bryellow --background=black
+  register: previous
+  changed_when: previous.stdout != " 'bryellow' '--background=black'"
+- name: set fish_color_history_current to --bold
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_history_current/ {print $2}';
+      and set -U fish_color_history_current --bold
+  register: previous
+  changed_when: previous.stdout != "--bold"
+- name: set fish_color_operator to 00a6b2
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_operator/ {print $2}';
+      and set -U fish_color_operator 00a6b2
+  register: previous
+  changed_when: previous.stdout != "00a6b2"
+- name: set fish_color_param to 839496
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_param/ {print $2}';
+      and set -U fish_color_param 839496
+  register: previous
+  changed_when: previous.stdout != "839496"
+- name: set fish_color_cwd to green
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_cwd / {print $2}';
+      and set -U fish_color_cwd green
+  register: previous
+  changed_when: previous.stdout != "green"
+- name: set fish_color_cwd_root to red
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_cwd_root/ {print $2}';
+      and set -U fish_color_cwd_root red
+  register: previous
+  changed_when: previous.stdout != "red"
+- name: set fish_color_valid_path to --underline
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_valid_path/ {print $2}';
+      and set -U fish_color_valid_path --underline
+  register: previous
+  changed_when: previous.stdout != "--underline"
+- name: set fish_color_autosuggestion to 586e75
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_autosuggestion/ {print $2}';
+      and set -U fish_color_autosuggestion 586e75
+  register: previous
+  changed_when: previous.stdout != "586e75"
+- name: set fish_color_user to brgreen
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_user/ {print $2}';
+      and set -U fish_color_user brgreen
+  register: previous
+  changed_when: previous.stdout != "brgreen"
+- name: set fish_color_escape to 00a6b2
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_escape/ {print $2}';
+      and set -U fish_color_escape 00a6b2
+  register: previous
+  changed_when: previous.stdout != "00a6b2"
+- name: set fish_color_cancel to -r
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_cancel/ {print $2}';
+      and set -U fish_color_cancel -r
+  register: previous
+  changed_when: previous.stdout != "-r"
+- name: set fish_pager_color_completion to B3A06D
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_pager_color_completion/ {print $2}';
+      and set -U fish_pager_color_completion B3A06D
+  register: previous
+  changed_when: previous.stdout != "B3A06D"
+- name: set fish_pager_color_description to B3A06D
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_pager_color_description/ {print $2}';
+      and set -U fish_pager_color_description B3A06D
+  register: previous
+  changed_when: previous.stdout != "B3A06D"
+- name: set fish_pager_color_description to B3A06D
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_pager_color_description/ {print $2}';
+      and set -U fish_pager_color_description B3A06D
+  register: previous
+  changed_when: previous.stdout != "B3A06D"
+- name: set fish_pager_color_prefix to "cyan --underline"
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_pager_color_prefix/ {$1=""; print $0}';
+      and set -U fish_pager_color_prefix cyan --underline
+  register: previous
+  changed_when: previous.stdout != " 'cyan' '--underline'"
+- name: set fish_pager_color_progress to "brwhite --background=cyan"
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_pager_color_progress/ {$1=""; print $0}';
+      and set -U fish_pager_color_progress brwhite --background=cyan
+  register: previous
+  changed_when: previous.stdout != " 'brwhite' '--background=cyan'"
+- name: set fish_color_host to normal
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_host/ {print $2}';
+      and set -U fish_color_host normal
+  register: previous
+  changed_when: previous.stdout != "normal"
+- name: set fish_color_match to --background=brblue
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_match/ {print $2}';
+      and set -U fish_color_match --background=brblue
+  register: previous
+  changed_when: previous.stdout != "--background=brblue"
+- name: set fish_color_comment to 586e75
+  ansible.builtin.shell:
+    executable: /usr/bin/fish
+    cmd: |
+      set -U | awk '/fish_color_comment/ {print $2}';
+      and set -U fish_color_comment 586e75
+  register: previous
+  changed_when: previous.stdout != "586e75"

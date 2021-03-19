@@ -12,7 +12,110 @@ endif::[]
 
 An Ansible role to configure the fish shell, primarily for my personal preferences.
 
-== Prerequisites
+== Synopsis
+
+Installs the newest fish shell on Ubuntu via the fish PPA repository, allows fish as a login, and configures the fish shell according to my preferences for the given _user_, which defaults to the user running Ansible.
+It also configures fish as the login shell for the user.
+
+== Variables
+
+The only variable is `user`.
+This is the user for whom fish is configured.
+
+== Use
+
+To use this role, you'll need to install Ansible and the role.
+
+. Install Ansible.
+
+Ubuntu::
++
+--
+.. Install the software-properties-common package.
++
+[source,sh]
+----
+➜ sudo apt -y install software-properties-common
+----
+
+.. Add the Ansible PPA.
++
+[source,sh]
+----
+➜ sudo add-apt-repository -yu ppa:ansible/ansible
+----
+
+.. Install the Ansible package.
++
+[source,sh]
+----
+➜ sudo apt -y install ansible
+----
+--
+
+Fedora::
++
+[source,sh]
+----
+➜ sudo dnf -y install ansible
+----
+
+. Create a roles directory in the current folder to place the role.
++
+[source,sh]
+----
+➜ mkdir roles
+----
+
+. Checkout the role's repository from GitHub into the `roles` directory.
++
+[source,sh]
+----
+➜ git clone https://github.com/jwillikers/ansible_fish.git roles/ansible_fish
+----
+
+. Run the role.
+Here, the role is run against the local machine.
+
+// todo Use -c local for local connection?
+Command-Line::
++
+[source,sh]
+----
+➜ ansible localhost -m include_role -a name=ansible_fish
+----
+
+Playbook::
++
+--
+.. Create a playbook which includes the role.
++
+[source,yaml]
+.my-playbook.yml
+----
+---
+- hosts: localhost
+ connection: local
+  roles:
+    - role: ansible_fish
+      vars:
+        user: some_user
+----
+
+.. Execute the playbook.
++
+[source,sh]
+----
+➜ ansible-playbook my-playbook.yml -i "localhost,"
+----
+--
+
+== Test With Molecule
+
+This project uses Molecule for testing.
+The sections below describe how to setup Molecule and run the tests.
+
+=== Prerequisites
 
 This project uses Ansible, Python, Molecule, and Podman.
 asdf is used to manage the Python runtime along with direnv and Pipenv to manage the project's virtual environment and Python dependencies.
@@ -424,7 +527,7 @@ direnv: error /home/ubuntu/Source/MyProject/.envrc is blocked. Run `direnv allow
 
 Now, whenever you change into the project directory, the project's virtual environment will automatically be loaded for you.
 
-== Test
+=== Test
 
 To create the container, run everything, test, and subsequently destroy the container, use `molecule test` from the project directory.
 
@@ -432,9 +535,6 @@ To create the container, run everything, test, and subsequently destroy the cont
 ----
 ➜ molecule test
 ----
-
-// == Deploy
-// todo: To deploy the playbook to the target devices...
 
 == References
 
