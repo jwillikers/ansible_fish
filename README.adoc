@@ -17,6 +17,13 @@ An Ansible role to configure the fish shell, primarily for my personal preferenc
 Installs the newest fish shell on Ubuntu via the fish PPA repository, allows fish as a login shell, and configures the fish shell according to my preferences for remote _user_.
 It also configures fish as the login shell for this user.
 
+.Supported Platforms
+* Ubuntu
+* todo: Fedora
+
+.Variables
+user:: The name of user for whom to configure fish.
+
 == Use
 
 To use this role, you'll need to install Ansible and the role.
@@ -72,13 +79,11 @@ Fedora::
 . Run the role.
 Here, the role is run against the local machine.
 
-sudo su
-
 Command-Line::
 +
 [source,sh]
 ----
-➜ ansible localhost --connection=local -m include_role -a name=ansible_fish
+➜ ansible localhost --connection=local --ask-become-pass -m include_role -a name=ansible_fish
 ----
 
 Playbook::
@@ -99,7 +104,7 @@ Playbook::
 +
 [source,sh]
 ----
-➜ ansible-playbook my-playbook.yml -i "localhost," --connection=local
+➜ ansible-playbook my-playbook.yml -i "localhost," --connection=local --ask-become-pass
 ----
 --
 
