@@ -30,7 +30,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_features/ {$1=""; print $0}'
+      set -U | awk '/fish_features / {$1=""; print $0}'
       and set -U fish_features stderr-nocaret qmark-noglob
   register: previous
   changed_when: previous.stdout != " 'stderr-nocaret' 'qmark-noglob'"
@@ -74,7 +74,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_normal/ {print $2}';
+      set -U | awk '/fish_color_normal / {print $2}';
       and set -U fish_color_normal normal
   register: previous
   changed_when: previous.stdout != "normal"
@@ -84,7 +84,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_command/ {print $2}';
+      set -U | awk '/fish_color_command / {print $2}';
       and set -U fish_color_command 93a1a1
   register: previous
   changed_when: previous.stdout != "93a1a1"
@@ -94,7 +94,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_quote/ {print $2}';
+      set -U | awk '/fish_color_quote / {print $2}';
       and set -U fish_color_quote 657b83
   register: previous
   changed_when: previous.stdout != "657b83"
@@ -104,7 +104,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_redirection/ {print $2}';
+      set -U | awk '/fish_color_redirection / {print $2}';
       and set -U fish_color_redirection 6c71c4
   register: previous
   changed_when: previous.stdout != "6c71c4"
@@ -114,7 +114,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_error/ {print $2}';
+      set -U | awk '/fish_color_error / {print $2}';
       and set -U fish_color_error dc322f
   register: previous
   changed_when: previous.stdout != "dc322f"
@@ -124,7 +124,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_end/ {print $2}';
+      set -U | awk '/fish_color_end / {print $2}';
       and set -U fish_color_end 268bd2
   register: previous
   changed_when: previous.stdout != "268bd2"
@@ -134,7 +134,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_selection/ {$1=""; print $0}';
+      set -U | awk '/fish_color_selection / {$1=""; print $0}';
       and set -U fish_color_selection white --bold --background=brblack
   register: previous
   changed_when: previous.stdout != " 'white' '--bold' '--background=brblack'"
@@ -144,7 +144,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_search_match/ {$1=""; print $0}';
+      set -U | awk '/fish_color_search_match / {$1=""; print $0}';
       and set -U fish_color_search_match bryellow --background=black
   register: previous
   changed_when: previous.stdout != " 'bryellow' '--background=black'"
@@ -154,7 +154,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_history_current/ {print $2}';
+      set -U | awk '/fish_color_history_current / {print $2}';
       and set -U fish_color_history_current --bold
   register: previous
   changed_when: previous.stdout != "--bold"
@@ -164,7 +164,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_operator/ {print $2}';
+      set -U | awk '/fish_color_operator / {print $2}';
       and set -U fish_color_operator 00a6b2
   register: previous
   changed_when: previous.stdout != "00a6b2"
@@ -174,7 +174,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_param/ {print $2}';
+      set -U | awk '/fish_color_param / {print $2}';
       and set -U fish_color_param 839496
   register: previous
   changed_when: previous.stdout != "839496"
@@ -194,7 +194,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_cwd_root/ {print $2}';
+      set -U | awk '/fish_color_cwd_root / {print $2}';
       and set -U fish_color_cwd_root red
   register: previous
   changed_when: previous.stdout != "red"
@@ -204,7 +204,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_valid_path/ {print $2}';
+      set -U | awk '/fish_color_valid_path / {print $2}';
       and set -U fish_color_valid_path --underline
   register: previous
   changed_when: previous.stdout != "--underline"
@@ -214,7 +214,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_autosuggestion/ {print $2}';
+      set -U | awk '/fish_color_autosuggestion / {print $2}';
       and set -U fish_color_autosuggestion 586e75
   register: previous
   changed_when: previous.stdout != "586e75"
@@ -224,7 +224,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_user/ {print $2}';
+      set -U | awk '/fish_color_user / {print $2}';
       and set -U fish_color_user brgreen
   register: previous
   changed_when: previous.stdout != "brgreen"
@@ -234,7 +234,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_escape/ {print $2}';
+      set -U | awk '/fish_color_escape / {print $2}';
       and set -U fish_color_escape 00a6b2
   register: previous
   changed_when: previous.stdout != "00a6b2"
@@ -244,7 +244,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_cancel/ {print $2}';
+      set -U | awk '/fish_color_cancel / {print $2}';
       and set -U fish_color_cancel -r
   register: previous
   changed_when: previous.stdout != "-r"
@@ -254,7 +254,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_pager_color_completion/ {print $2}';
+      set -U | awk '/fish_pager_color_completion / {print $2}';
       and set -U fish_pager_color_completion B3A06D
   register: previous
   changed_when: previous.stdout != "B3A06D"
@@ -264,7 +264,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_pager_color_description/ {print $2}';
+      set -U | awk '/fish_pager_color_description / {print $2}';
       and set -U fish_pager_color_description B3A06D
   register: previous
   changed_when: previous.stdout != "B3A06D"
@@ -274,7 +274,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_pager_color_description/ {print $2}';
+      set -U | awk '/fish_pager_color_description / {print $2}';
       and set -U fish_pager_color_description B3A06D
   register: previous
   changed_when: previous.stdout != "B3A06D"
@@ -284,7 +284,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_pager_color_prefix/ {$1=""; print $0}';
+      set -U | awk '/fish_pager_color_prefix / {$1=""; print $0}';
       and set -U fish_pager_color_prefix cyan --underline
   register: previous
   changed_when: previous.stdout != " 'cyan' '--underline'"
@@ -294,7 +294,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_pager_color_progress/ {$1=""; print $0}';
+      set -U | awk '/fish_pager_color_progress / {$1=""; print $0}';
       and set -U fish_pager_color_progress brwhite --background=cyan
   register: previous
   changed_when: previous.stdout != " 'brwhite' '--background=cyan'"
@@ -304,7 +304,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_host/ {print $2}';
+      set -U | awk '/fish_color_host / {print $2}';
       and set -U fish_color_host normal
   register: previous
   changed_when: previous.stdout != "normal"
@@ -314,7 +314,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_match/ {print $2}';
+      set -U | awk '/fish_color_match / {print $2}';
       and set -U fish_color_match --background=brblue
   register: previous
   changed_when: previous.stdout != "--background=brblue"
@@ -324,7 +324,7 @@
   ansible.builtin.shell:
     executable: /usr/bin/fish
     cmd: |
-      set -U | awk '/fish_color_comment/ {print $2}';
+      set -U | awk '/fish_color_comment / {print $2}';
       and set -U fish_color_comment 586e75
   register: previous
   changed_when: previous.stdout != "586e75"
