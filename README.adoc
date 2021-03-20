@@ -9,6 +9,10 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:Debian: https://www.debian.org/[Debian]
+:Fedora: https://getfedora.org/[Fedora]
+:OpenBSD: https://www.openbsd.org/[OpenBSD]
+:Ubuntu: https://ubuntu.com/[Ubuntu]
 
 image:https://img.shields.io/github/workflow/status/jwillikers/ansible_fish/Molecule%20Test[GitHub Workflow Status]
 
@@ -20,8 +24,10 @@ Installs the newest fish shell on Ubuntu via the fish PPA repository, allows fis
 It also configures fish as the login shell for this user.
 
 .Supported Platforms
-* Ubuntu
-* todo: Fedora
+* {Debian}
+* {Fedora}
+* {Ubuntu}
+* todo: {OpenBSD}
 
 .Variables
 user:: The name of user for whom to configure fish.
@@ -565,18 +571,20 @@ Several of these projects are enumerated below.
 * https://www.ansible.com/[Ansible]
 * https://asciidoctor.org/[Asciidoctor]
 * https://asdf-vm.com/#/[asdf]
-* https://www.debian.org/[Debian]
+* {Debian}
+* {Fedora}
 * https://direnv.net/[direnv]
 * https://git-scm.com/[Git]
 * https://www.linuxfoundation.org/[Linux]
 * https://molecule.readthedocs.io/en/latest/[Molecule]
+* {OpenBSD}
 * https://www.openssh.com/[OpenSSH]
 * https://pipenv.pypa.io/en/latest/[Pipenv]
 * https://podman.io/[Podman]
 * https://www.python.org/[Python]
 * https://rouge.jneen.net/[Rouge]
 * https://www.ruby-lang.org/en/[Ruby]
-* https://ubuntu.com/[Ubuntu]
+* {Ubuntu}
 
 == Code of Conduct
 

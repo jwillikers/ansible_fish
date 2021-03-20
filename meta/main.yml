@@ -1,6 +1,6 @@
 galaxy_info:
   author: Jordan Williams
-  description: Configure my Ubuntu 20.04 desktop
+  description: Install the fish shell on a system and configure it for a user
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -38,9 +38,18 @@ galaxy_info:
   #   - 7
   #   - 99.99
   platforms:
+    - name: Debian
+      versions:
+        - 10
+    - name: Fedora
+      versions:
+        - 33
+        - 34
     - name: Ubuntu
       versions:
+        - 18.04
         - 20.04
+        - 20.10
 
   galaxy_tags:
     []

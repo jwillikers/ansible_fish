@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "include ansible_fish"
+    - name: Include ansible_fish
       include_role:
         name: "ansible_fish"
