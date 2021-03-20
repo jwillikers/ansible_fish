@@ -17,4 +17,4 @@ provisioner:
       pipelining: false
 verifier:
   name: ansible
-lint: yamllint .; and ansible-lint .
+lint: yamllint . && ansible-lint .
