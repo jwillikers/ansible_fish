@@ -63,6 +63,7 @@
   become_user: "{{ user }}"
   ansible.builtin.copy:
     src: /usr/share/fish/tools/web_config/sample_prompts/robbyrussell.fish
+    remote_src: true
     dest: "{{ u.home }}/.config/fish/functions/fish_prompt.fish"
     mode: 0640
     owner: "{{ user }}"
