@@ -1,0 +1,38 @@
+---
+name: Molecule Test
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - name: check out repository code
+        uses: actions/checkout@v2
+
+      - name: setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: install Pipenv
+        run: |
+          python -m pip install --upgrade pipenv wheel
+
+      - name: cache Pipenv
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-Python-${{ matrix.python-version }}-Pipenv-${{ hashFiles('**/Pipfile.lock') }}
+
+      - name: install dependencies
+        if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        run: |
+          pipenv install --deploy --dev
+
+      - name: test with molecule
+        run: |
+          pipenv run molecule test
