@@ -4,11 +4,6 @@ dependency:
 driver:
   name: podman
 platforms:
-  - name: debian
-    image: docker.io/pycontribs/debian
-    pre_build_image: true
-    groups:
-      - Debian
   - name: fedora33
     image: docker.io/fedora:33
     pre_build_image: true
@@ -23,7 +18,7 @@ platforms:
     image: docker.io/pycontribs/ubuntu
     pre_build_image: true
     groups:
-      - Debian
+      - Ubuntu
 provisioner:
   name: ansible
   config_options:

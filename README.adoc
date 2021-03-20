@@ -24,7 +24,6 @@ Installs the newest fish shell on Ubuntu via the fish PPA repository, allows fis
 It also configures fish as the login shell for this user.
 
 .Supported Platforms
-* {Debian}
 * {Fedora}
 * {Ubuntu}
 * todo: {OpenBSD}
