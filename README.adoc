@@ -10,6 +10,8 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+image:https://img.shields.io/github/workflow/status/jwillikers/ansible_fish/Molecule%20Test[GitHub Workflow Status]
+
 An Ansible role to configure the fish shell, primarily for my personal preferences.
 
 == Synopsis
