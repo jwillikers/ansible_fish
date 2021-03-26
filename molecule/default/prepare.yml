@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Update Aptitude's package cache
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+      when: ansible_facts['os_family'] == "Debian"
