@@ -1,6 +1,12 @@
 ---
 # tasks file for ansible_fish
 
+- name: Update Aptitude's package cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+  when: ansible_facts['os_family'] == "Debian"
+
 - name: Install the necessary packages to add an apt repository on Debian systems
   become: true
   ansible.builtin.package:
